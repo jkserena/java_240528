@@ -27,3 +27,4 @@ java_bdj/.gitignore
 hs_err_pid*
 replay_pid*
 /bin/
+src/module-info.java
