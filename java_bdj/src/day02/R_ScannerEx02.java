@@ -26,7 +26,7 @@ public class R_ScannerEx02 {
 				:(ch1 == '*')? num1 * num2
 				:(ch1 == '/')? num1 / num2 : 0;
 		
-		System.out.println("연산결과 : " + result);
+		System.out.println("연산결과 : " + ((result==0)?"연산자 오류!":result));
 		
 
 	}
