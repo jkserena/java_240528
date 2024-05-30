@@ -8,10 +8,10 @@ public class C_IfExam02 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Scanner scan = new Scanner(System.in);
 		int month;
-		//while (true) {
-		for(;;) {
+		// while (true) {
+		for (;;) {
+			Scanner scan = new Scanner(System.in);
 			try {
 				System.out.printf("월을 입력 하세요 : ");
 				month = scan.nextInt();
@@ -20,6 +20,7 @@ public class C_IfExam02 {
 				System.out.println("[ERROR] 정수를 입력하세요.");
 				scan.nextLine();
 			}
+			scan.close();
 		}
 		if (month >= 3 && month < 6)
 			System.out.println("봄");
@@ -41,8 +42,6 @@ public class C_IfExam02 {
 //			System.out.println("겨울");
 //		else 
 //			System.out.println("잘못");
-
-		scan.close();
 
 	}
 
