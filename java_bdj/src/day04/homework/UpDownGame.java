@@ -1,4 +1,4 @@
-package day04_homework;
+package day04.homework;
 
 import java.util.Scanner;
 
@@ -17,7 +17,20 @@ public class UpDownGame {
 		System.out.println(min + " ~ " + max + " 사이");
 		
 		int num;
-		while(true) {
+//		while(true) {
+//			System.out.print("정수 입력 : ");
+//			num = scan.nextInt();
+//			if(num == randNum) {
+//				System.out.println("정답입니다.");
+//				break;
+//				}
+//			else if(num>randNum)
+//				System.out.println("DOWN!");
+//			else if(num<randNum)
+//				System.out.println("UP!");
+//		}
+		
+		do {
 			System.out.print("정수 입력 : ");
 			num = scan.nextInt();
 			if(num == randNum) {
@@ -28,7 +41,8 @@ public class UpDownGame {
 				System.out.println("DOWN!");
 			else if(num<randNum)
 				System.out.println("UP!");
-		}
+		}while(num!=randNum);
+		
 		scan.close();
 	}
 
