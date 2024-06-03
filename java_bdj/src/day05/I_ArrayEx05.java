@@ -60,9 +60,9 @@ package day05;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
 public class I_ArrayEx05 {
 
-	// rand 함수 틀
 	public static int randGen(int min, int max) {
 
 		return (int) (Math.random() * (max - min + 1) + min);
@@ -88,31 +88,39 @@ public class I_ArrayEx05 {
 			System.out.println("입력한 숫자가 있습니다");
 		else
 			System.out.println("입력한 숫자가 없습니다");
-		System.out.print("정답)) 3개의 숫자 : ");
+		System.out.print("[입력값 : " + ans + "] < ");
 		for (int tmp : num)
 			System.out.print(tmp + " ");
+		System.out.println(">");
 	}
 
-	public static void main(String[] args) {
-
+	public static int inputAnswer(int min, int max) {
 		Scanner scan = new Scanner(System.in);
-		int min = 1, max = 10;
-		int[] num = new int[3];
-		num = randArray(min, max, num.length);
-
 		int ans = 0;
+		
 		do {
 			try {
 				System.out.print(min + "~" + max + "사이의 숫자를 입력하세요 : ");
 				ans = scan.nextInt();
 			} catch (InputMismatchException e) {
-				System.out.println("[ERROR] 범위 안의 숫자를 입력하세요");
+				System.out.println("[ERROR] 입력값 체크");
 				scan.nextLine();
 			}
 		} while (ans < 1 || ans > 10);
+		scan.close();
+		return ans;
+	}
+
+	public static void main(String[] args) {
+
+		int min = 1, max = 10;
+		int[] num = new int[3];
+		
+		num = randArray(min, max, num.length);
+		int ans = inputAnswer(min, max);
+
 		checkAnswer(num, ans);
 
-		scan.close();
 	}
 
 }
