@@ -18,7 +18,7 @@ public class C_ArrayEx07copy {
 	}
 
 	public static void showRecord(int[] scoreRecord) {
-		
+
 		System.out.println("<기록>");
 		int no = 1;
 		for (int i = 0; i < scoreRecord.length; i++) {
@@ -62,7 +62,7 @@ public class C_ArrayEx07copy {
 				System.out.println("UP!");
 			}
 		} while (true);
-		
+
 		scan.close();
 		return scoreRecord;
 	}
@@ -75,24 +75,26 @@ public class C_ArrayEx07copy {
 		int menuNum;
 		int[] scoreTable = new int[5];
 
-		while (true) {
+		do {
 
 			showMenu();
 			menuNum = mScan.nextInt();
 			mScan.nextLine();
 
-			if (menuNum == 1) {
+			switch (menuNum) {
+			case 1:
 				int randNum = randGen(min, max);
 				playGame(scoreTable, randNum);
 				Arrays.sort(scoreTable);
-			} else if (menuNum == 2) {
+				break;
+			case 2:
 				showRecord(scoreTable);
-			} else if (menuNum == 3) {
+				break;
+			case 3:
 				System.out.println("게임 종료");
 				break;
 			}
-		}
+		} while (menuNum != 3);
 		mScan.close();
 	}
-
 }
