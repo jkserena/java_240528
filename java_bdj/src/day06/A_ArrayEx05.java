@@ -19,17 +19,17 @@ public class A_ArrayEx05 {
 //		
 //		System.out.println();
 		
-		boolean[] isDecimal = new boolean[maxNum+1];
+		boolean[] isPrime = new boolean[maxNum+1];
 
-		for (int i = 2; i < isDecimal.length; i++) {
-			if (isDecimal[i] == false) {
-				for (int j = 2; i*j < isDecimal.length; j++) {
-					isDecimal[i * j] = true;
+		for (int i = 2; i < isPrime.length; i++) {
+			if (isPrime[i] == false) {
+				for (int j = 2; i*j < isPrime.length; j++) {
+					isPrime[i * j] = true;
 				}
 			}
 		}
-		for(int i =2; i< isDecimal.length; i++) {
-			System.out.print((isDecimal[i])?"":i+" ");
+		for(int i =2; i< isPrime.length; i++) {
+			System.out.print((isPrime[i])?"":i+" ");
 //			if(i%10 == 0)
 //				System.out.println();
 		}

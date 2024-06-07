@@ -5,6 +5,7 @@ import java.util.Collections;
 
 public class D_ArrayEx02 {
 
+	
 	// rand 함수 틀
 	public static int randGen(int min, int max) {
 

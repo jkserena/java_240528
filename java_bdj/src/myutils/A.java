@@ -1,4 +1,4 @@
-package elses;
+package myutils;
 
 public class A {
 	int a;
