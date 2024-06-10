@@ -50,6 +50,8 @@ public class MyMath {
 	public static int randGen(int min, int max) {
 
 		return (int) (Math.random() * (max - min + 1) + min);
+		// min 10 max 1 => -10 *rand + 10
+		// min, max가 바껴도 상관이 없다!
 	}
 
 	// rand num 생성기, 중복제외 처리

@@ -6,6 +6,10 @@ public class C_MethodEx02___ {
 	public static boolean isDivisor(long num1, long num2) {
 		return num1 % num2 == 0;
 	}
+	
+	public static boolean isDivisor(int num1, long num2) {
+		return num1 % num2 == 0;
+	}
 
 	// 최대공약수
 	// 두 수 중 작은 수의 값을 줄여가며 두 수 모두에 약수가 있는 지 확인

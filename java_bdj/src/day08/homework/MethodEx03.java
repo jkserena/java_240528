@@ -10,10 +10,11 @@ public class MethodEx03 {
 		// homework ex01, ex02 + day08.Ex05
 		int min =1, max=45;
 		int num = MethodEx01.inputNum();  //inputNum();
-		int randList[] = MethodEx01.allocateSize(num);  //allocateSize(num);
+		int randList[] = MethodEx01.createArray(num);  //allocateSize(num);
 
 		randList = myutils.MyMath.numGen(min, max, randList);
 		Arrays.sort(randList);
+		Arrays.sort(new int[]{1,2,3});
 		System.out.println(Arrays.toString(randList));
 	}
 
