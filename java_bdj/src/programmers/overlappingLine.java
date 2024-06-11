@@ -1,6 +1,8 @@
 package programmers;
 
 //https://school.programmers.co.kr/learn/courses/30/lessons/120876
+// 선분이 주어졌을 때 겹치는 부분의 길이 출력 중복x
+
 public class overlappingLine {
 
 	public static void main(String[] args) {

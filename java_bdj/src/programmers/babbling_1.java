@@ -1,5 +1,6 @@
 package programmers;
 
+// 옹아리
 public class babbling_1 {
 
 	public static void main(String[] args) {

@@ -7,4 +7,8 @@ public class utils {
 	public static int swap(int a, int b) {
 		return a;
 	}
+	
+	public static String swap(String a, String b) {
+		return a;
+	}
 }
