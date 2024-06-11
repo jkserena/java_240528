@@ -9,18 +9,6 @@ public class A_VocabularyEx01 {
 	// 단어 의미 출력
 	// 단어 의미 수정
 	// 단어 삭제
-	public static void sortWordList(Words[] words, int wordCount) {
-		// bubble~ 젤 큰거 맨 뒤로
-		for (int i = 0; i < wordCount - 1; i++) {
-			for (int j = 0; j < wordCount - 1 - i; j++) {
-				if (words[j].getWord().compareTo(words[j + 1].getWord()) > 0) {
-					Words tmpWord = words[j];
-					words[j] = words[j + 1];
-					words[j + 1] = tmpWord;
-				}
-			}
-		}
-	}
 
 	public static int showMenu(Scanner sc) {
 
@@ -38,39 +26,36 @@ public class A_VocabularyEx01 {
 		return menuNum;
 	}
 
-	public static boolean insertWord(Words[] words, int wordCount, Scanner sc) {
+	public static void insertWord(Words[] words, int wordCount, Scanner sc) {
 
-		Words tmpWord = tmpWord(sc, false);
-		int indexWord = indexOfWord(words, tmpWord, wordCount);
+		Words tmpWord = tmpWordGen(false, sc);
 
-		if (indexWord == -1) {
-			words[wordCount] = tmpWord;
-			System.out.println("단어를 등록 했습니다");
-			return true;
-		}
-		System.out.println("단어가 이미 있습니다");
-		return false;
+		words[wordCount] = tmpWord;
+		System.out.println("단어를 등록 했습니다");
+
 	}
 
 	public static void updateWord(Words[] words, int wordCount, Scanner sc) {
 
-		Words tmpWord = tmpWord(sc, true);
+		Words tmpWord = tmpWordGen(true, sc);
 		int indexWord = indexOfWord(words, tmpWord, wordCount);
 
 		if (indexWord == -1) {
 			System.out.println("수정할 단어가 없습니다.");
 		} else {
-			System.out.print("수정할 품사 입력 : ");
-			words[indexWord].setPos(sc.nextLine());
-			System.out.print("수정할 뜻 입력 : ");
-			words[indexWord].setMeaning(sc.nextLine());
+
+			int selectIndex = selectDuplicatedWord(words[indexWord].getWord(), words, wordCount, sc);
+
+			tmpWord = tmpWordGen(false, sc);
+			words[selectIndex].updateWord(tmpWord);
+
 			System.out.println("수정 완료");
 		}
 	}
 
 	public static void searchWord(Words[] words, int wordCount, Scanner sc) {
 
-		Words tmpWord = tmpWord(sc, true);
+		Words tmpWord = tmpWordGen(true, sc);
 		int indexWord = indexOfWord(words, tmpWord, wordCount);
 
 		if (indexWord == -1) {
@@ -82,12 +67,15 @@ public class A_VocabularyEx01 {
 
 	public static boolean deleteWord(Words[] words, int wordCount, Scanner sc) {
 
-		Words tmpWord = tmpWord(sc, true);
+		Words tmpWord = tmpWordGen(true, sc);
 		int indexWord = indexOfWord(words, tmpWord, wordCount);
 		if (indexWord == -1) {
 			System.out.println("삭제할 단어가 없습니다");
 		} else {
-			for (int i = indexWord; i < wordCount; i++) {
+
+			int selectIndex = selectDuplicatedWord(words[indexWord].getWord(), words, wordCount, sc);
+
+			for (int i = selectIndex; i < wordCount - 1; i++) {
 				words[i] = words[i + 1];
 			}
 			words[wordCount - 1] = null;
@@ -108,7 +96,7 @@ public class A_VocabularyEx01 {
 		return indexWord;
 	}
 
-	public static Words tmpWord(Scanner sc, boolean isSearch) {
+	public static Words tmpWordGen(boolean isSearch, Scanner sc) {
 
 		String word, meaning, pos;
 
@@ -126,6 +114,64 @@ public class A_VocabularyEx01 {
 		return new Words(word, pos, meaning);
 	}
 
+	public static Words[] expandWords(Words[] words, int newMax) {
+		Words tmp[] = new Words[newMax];
+		System.arraycopy(words, 0, tmp, 0, words.length);
+		return tmp;
+	}
+
+	public static void printWordAll(Words[] words, int wordCount) {
+		for (int i = 0; i < wordCount; i++) {
+			words[i].print();
+		}
+		System.out.println("---------------------");
+	}
+
+	public static void sortWordList(Words[] words, int wordCount) {
+		// bubble~ 젤 큰거 맨 뒤로
+		for (int i = 0; i < wordCount - 1; i++) {
+			for (int j = 0; j < wordCount - 1 - i; j++) {
+				if (words[j].getWord().compareTo(words[j + 1].getWord()) > 0) {
+					words[j + 1] = myutils.utils.swap(words[j], words[j] = words[j + 1]);
+				}
+			}
+		}
+	}
+
+	public static int selectDuplicatedWord(String searchWord, Words[] words, int wordCount, Scanner sc) {
+		int dupIndexList[] = new int[wordCount];
+		int dupCount = 0;
+		for (int i = 0; i < wordCount; i++) {
+			if (words[i].getWord().equals(searchWord)) {
+				dupIndexList[dupCount++] = i;
+			}
+		}
+
+		int selectNum;
+		for (int i = 0; i < dupCount; i++) {
+			System.out.println(i + 1 + "번.");
+			words[dupIndexList[i]].print();
+		}
+		do {
+			System.out.print("단어의 번호를 선택하세요 : ");
+			selectNum = sc.nextInt();
+			if (selectNum <= dupCount && selectNum > 0) {
+				return (dupIndexList[selectNum - 1]);
+			} else
+				System.out.println("번호를 잘 못 입력했습니다");
+		} while (true);
+
+	}
+//	public static boolean checkWord(Word[] list, String word, int index) {
+//		if(list.length <= index || index < 0 ) {
+//			return false;
+//		}
+//		if(list[index] == null) {
+//			return false;
+//		}
+//		return list[index].getWord().equals(word);
+//	}
+
 	public static void main(String[] args) {
 		// 영어 단어를 관리하기 위한 Word 클래스를 만들고
 		// 필요한 멤버변수 들을 선언 해보세요.
@@ -133,48 +179,53 @@ public class A_VocabularyEx01 {
 		Scanner sc = new Scanner(System.in);
 		int menuNum;
 		int wordCount = 0;
-		final int wordMax = 10;
+		final int wordMax = 2;
 		Words[] words = new Words[wordMax];
 
 		do {
 			menuNum = showMenu(sc);
 
 			switch (menuNum) {
-			case 1:
-				System.out.println("단어 추가");
-				if (wordMax > wordCount) {
-					if (insertWord(words, wordCount, sc)) {
-						wordCount++;
-						sortWordList(words, wordCount);
+				case 1:
+					System.out.println("단어 추가");
+					if (words.length == wordCount) {
+						System.out.println("단어장 크기 확장");
+						words = expandWords(words, words.length + wordMax);
 					}
-				} else
-					System.out.println("추가 불가 (갯수 초과)");
-				break;
-			case 2:
-				System.out.println("단어 수정");
-				if (wordCount != 0) {
-					updateWord(words, wordCount, sc);
-				} else
-					System.out.println("수정 불가 (단어 없음)");
-				break;
-			case 3:
-				System.out.println("단어 조회");
-				if (wordCount != 0) {
-					searchWord(words, wordCount, sc);
-				} else
-					System.out.println("조회 불가 (단어 없음)");
-				break;
-			case 4:
-				System.out.println("단어 삭제");
-				if (wordCount != 0) {
-					if (deleteWord(words, wordCount, sc))
-						wordCount--;
-				} else
-					System.out.println("삭제 불가 (단어 없음)");
-				break;
-			case 5:
-				System.out.println("단어장 종료");
-				break;
+					insertWord(words, wordCount++, sc);
+					sortWordList(words, wordCount);
+
+					break;
+				case 2:
+					System.out.println("단어 수정");
+					if (wordCount != 0) {
+						updateWord(words, wordCount, sc);
+						sortWordList(words, wordCount);
+					} else
+						System.out.println("수정 불가 (단어 없음)");
+					break;
+				case 3:
+					System.out.println("단어 조회");
+					if (wordCount != 0) {
+						searchWord(words, wordCount, sc);
+					} else
+						System.out.println("조회 불가 (단어 없음)");
+					break;
+				case 4:
+					System.out.println("단어 삭제");
+					if (wordCount != 0) {
+						if (deleteWord(words, wordCount, sc))
+							wordCount--;
+					} else
+						System.out.println("삭제 불가 (단어 없음)");
+					break;
+				case 5:
+					System.out.println("단어장 종료");
+					break;
+				case 10:
+					System.out.println("모든 단어 출력");
+					printWordAll(words, wordCount);
+					break;
 			}
 		} while (menuNum != 5);
 
@@ -219,11 +270,17 @@ class Words {
 		this.word = word;
 	}
 
+	public void updateWord(Words word) {
+		this.word = word.word;
+		this.pos = word.pos;
+		this.meaning = word.meaning;
+	}
+
 	public void print() {
 		System.out.println("---------------------");
-		System.out.print("word : " + word);
-		System.out.println(", pos : " + pos);
-		System.out.println("meaning : " + meaning + "");
+		System.out.print("단어 : " + word);
+		System.out.println("(품사 : " + pos + ")");
+		System.out.println("뜻 : " + meaning + "");
 		System.out.println("---------------------");
 	}
 
