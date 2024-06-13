@@ -91,6 +91,8 @@ public class G_StudentEx01 {
 						String name;
 						System.out.print("이름 입력 : ");
 						name = scan.nextLine();//.replace(" ", "");
+						name = scan.nextLine().trim();
+						name = scan.nextLine().replace(" ", "");
 						std[stdCount++].setName(name);
 						scan.nextLine();
 					}

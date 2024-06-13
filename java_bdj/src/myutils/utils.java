@@ -7,4 +7,8 @@ public class utils {
 	public static <T> T swap(T a, T b) {
 		return a;
 	}
+	
+//	public static <T> T sum(T a, T b) {
+//		return (a + b);
+//	}
 }

@@ -61,7 +61,8 @@ public class A_VocabularyEx01 {
 		if (indexWord == -1) {
 			System.out.println("조회할 단어가 없습니다");
 		} else {
-			words[indexWord].print();
+			printWordAll(words, wordCount, words[indexWord].getWord());
+			//words[indexWord].print();
 		}
 	}
 
@@ -119,10 +120,14 @@ public class A_VocabularyEx01 {
 		System.arraycopy(words, 0, tmp, 0, words.length);
 		return tmp;
 	}
-
-	public static void printWordAll(Words[] words, int wordCount) {
+	// wordlist에서 searchword가 없다면 전체 출력. 
+	// searchword가 있다면 해당 단어만 출력
+	public static void printWordAll(Words[] words, int wordCount, String searchWord) {
 		for (int i = 0; i < wordCount; i++) {
-			words[i].print();
+			if (searchWord == null)
+				words[i].print();
+			else if (words[i].getWord().equals(searchWord))
+				words[i].print();
 		}
 		System.out.println("---------------------");
 	}
@@ -224,7 +229,7 @@ public class A_VocabularyEx01 {
 					break;
 				case 10:
 					System.out.println("모든 단어 출력");
-					printWordAll(words, wordCount);
+					printWordAll(words, wordCount, null);
 					break;
 			}
 		} while (menuNum != 5);
