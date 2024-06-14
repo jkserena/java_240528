@@ -15,7 +15,7 @@ public class E_InterfaceInhritanceEx01 {
 interface InterfacePA {
 
 	void print();
-	void test1();
+	default void test1() {};
 
 }
 

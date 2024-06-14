@@ -3,7 +3,7 @@ package day12;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class F_ObjectEx01 {
+public class F_Object_Clone_Ex01 {
 
 	public static void main(String[] args) throws CloneNotSupportedException {
 

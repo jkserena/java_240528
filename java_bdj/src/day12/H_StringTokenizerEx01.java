@@ -4,6 +4,7 @@ import java.util.StringTokenizer;
 
 public class H_StringTokenizerEx01 {
 
+		// split은 한번에 배열로 만들어준다. 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String fruit = "사과,포도,배, , , ㅓㅓ";

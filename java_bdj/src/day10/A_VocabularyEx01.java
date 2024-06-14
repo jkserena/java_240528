@@ -26,18 +26,18 @@ public class A_VocabularyEx01 {
 		return menuNum;
 	}
 
-	public static void insertWord(Words[] words, int wordCount, Scanner sc) {
+	public static void insertWord(Phone[] words, int wordCount, Scanner sc) {
 
-		Words tmpWord = tmpWordGen(false, sc);
+		Phone tmpWord = tmpWordGen(false, sc);
 
 		words[wordCount] = tmpWord;
 		System.out.println("단어를 등록 했습니다");
 
 	}
 
-	public static void updateWord(Words[] words, int wordCount, Scanner sc) {
+	public static void updateWord(Phone[] words, int wordCount, Scanner sc) {
 
-		Words tmpWord = tmpWordGen(true, sc);
+		Phone tmpWord = tmpWordGen(true, sc);
 		int indexWord = indexOfWord(words, tmpWord, wordCount);
 
 		if (indexWord == -1) {
@@ -53,9 +53,9 @@ public class A_VocabularyEx01 {
 		}
 	}
 
-	public static void searchWord(Words[] words, int wordCount, Scanner sc) {
+	public static void searchWord(Phone[] words, int wordCount, Scanner sc) {
 
-		Words tmpWord = tmpWordGen(true, sc);
+		Phone tmpWord = tmpWordGen(true, sc);
 		int indexWord = indexOfWord(words, tmpWord, wordCount);
 
 		if (indexWord == -1) {
@@ -66,9 +66,9 @@ public class A_VocabularyEx01 {
 		}
 	}
 
-	public static boolean deleteWord(Words[] words, int wordCount, Scanner sc) {
+	public static boolean deleteWord(Phone[] words, int wordCount, Scanner sc) {
 
-		Words tmpWord = tmpWordGen(true, sc);
+		Phone tmpWord = tmpWordGen(true, sc);
 		int indexWord = indexOfWord(words, tmpWord, wordCount);
 		if (indexWord == -1) {
 			System.out.println("삭제할 단어가 없습니다");
@@ -87,7 +87,7 @@ public class A_VocabularyEx01 {
 		return false;
 	}
 
-	public static int indexOfWord(Words[] words, Words tmpWord, int wordCount) {
+	public static int indexOfWord(Phone[] words, Phone tmpWord, int wordCount) {
 		int indexWord = -1;
 		for (int i = 0; i < wordCount; i++) {
 			if (words[i].getWord().equals(tmpWord.getWord())) {
@@ -97,7 +97,7 @@ public class A_VocabularyEx01 {
 		return indexWord;
 	}
 
-	public static Words tmpWordGen(boolean isSearch, Scanner sc) {
+	public static Phone tmpWordGen(boolean isSearch, Scanner sc) {
 
 		String word, meaning, pos;
 
@@ -105,24 +105,24 @@ public class A_VocabularyEx01 {
 		System.out.print("단어 입력 :");
 		word = sc.nextLine();
 		if (isSearch) {
-			return new Words(word);
+			return new Phone(word);
 		}
 		System.out.print("품사 입력 :");
 		pos = sc.nextLine();
 		System.out.print("뜻 입력 :");
 		meaning = sc.nextLine();
 
-		return new Words(word, pos, meaning);
+		return new Phone(word, pos, meaning);
 	}
 
-	public static Words[] expandWords(Words[] words, int newMax) {
-		Words tmp[] = new Words[newMax];
+	public static Phone[] expandWords(Phone[] words, int newMax) {
+		Phone tmp[] = new Phone[newMax];
 		System.arraycopy(words, 0, tmp, 0, words.length);
 		return tmp;
 	}
 	// wordlist에서 searchword가 없다면 전체 출력. 
 	// searchword가 있다면 해당 단어만 출력
-	public static void printWordAll(Words[] words, int wordCount, String searchWord) {
+	public static void printWordAll(Phone[] words, int wordCount, String searchWord) {
 		for (int i = 0; i < wordCount; i++) {
 			if (searchWord == null)
 				words[i].print();
@@ -132,7 +132,7 @@ public class A_VocabularyEx01 {
 		System.out.println("---------------------");
 	}
 
-	public static void sortWordList(Words[] words, int wordCount) {
+	public static void sortWordList(Phone[] words, int wordCount) {
 		// bubble~ 젤 큰거 맨 뒤로
 		for (int i = 0; i < wordCount - 1; i++) {
 			for (int j = 0; j < wordCount - 1 - i; j++) {
@@ -143,7 +143,7 @@ public class A_VocabularyEx01 {
 		}
 	}
 
-	public static int selectDuplicatedWord(String searchWord, Words[] words, int wordCount, Scanner sc) {
+	public static int selectDuplicatedWord(String searchWord, Phone[] words, int wordCount, Scanner sc) {
 		int dupIndexList[] = new int[wordCount];
 		int dupCount = 0;
 		for (int i = 0; i < wordCount; i++) {
@@ -182,10 +182,11 @@ public class A_VocabularyEx01 {
 		// 필요한 멤버변수 들을 선언 해보세요.
 
 		Scanner sc = new Scanner(System.in);
+		
 		int menuNum;
 		int wordCount = 0;
 		final int wordMax = 2;
-		Words[] words = new Words[wordMax];
+		Phone[] words = new Phone[wordMax];
 
 		do {
 			menuNum = showMenu(sc);
@@ -238,7 +239,7 @@ public class A_VocabularyEx01 {
 	}
 }
 
-class Words {
+class Phone {
 	private String word, pos, meaning;
 
 	public String getPos() {
@@ -265,17 +266,17 @@ class Words {
 		this.meaning = meaning;
 	}
 
-	public Words(String word, String pos, String meaning) {
+	public Phone(String word, String pos, String meaning) {
 		this.word = word;
 		this.pos = pos;
 		this.meaning = meaning;
 	}
 
-	public Words(String word) {
+	public Phone(String word) {
 		this.word = word;
 	}
 
-	public void updateWord(Words word) {
+	public void updateWord(Phone word) {
 		this.word = word.word;
 		this.pos = word.pos;
 		this.meaning = word.meaning;
