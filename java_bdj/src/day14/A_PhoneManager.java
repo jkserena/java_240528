@@ -32,7 +32,7 @@ public class A_PhoneManager implements Program {
 	}
 
 	@Override
-	public void runMenu(int menu) throws Exception {
+	public void runMenu(int menu) {
 		switch (menu) {
 			case INSERT:
 				insert();
@@ -56,10 +56,10 @@ public class A_PhoneManager implements Program {
 	}
 
 	private void expand() {
-		if(list.length>count) {
+		if (list.length > count) {
 			return;
 		}
-		A_Contact [] tmp = new A_Contact[list.length+10];
+		A_Contact[] tmp = new A_Contact[list.length + 10];
 		System.arraycopy(list, 0, tmp, 0, list.length);
 		list = tmp;
 	}
@@ -101,7 +101,8 @@ public class A_PhoneManager implements Program {
 		if (index != count) {
 			A_Contact[] tmp = new A_Contact[list.length];
 			// 4, 2
-			System.arraycopy(tmp, index + 1, list, index, count - index);
+			System.arraycopy(tmp, index + 1, list, index,
+					count - index);
 		}
 
 		// 연락처 개수를 1감소
@@ -109,7 +110,7 @@ public class A_PhoneManager implements Program {
 		System.out.println("연락처를 삭제했습니다.");
 	}
 
-	private void update() throws Exception {
+	private void update(){
 		// 이름 입력
 		scan.nextLine();// 공백 처리
 		System.out.print("이름 : ");
@@ -162,7 +163,8 @@ public class A_PhoneManager implements Program {
 		int sameCount = 0;// 이름과 일치하는 연락처 개수 => 없는 경우 안내문구를 위해
 		for (int i = 0; i < count; i++) {
 			if (list[i].getName().contains(name)) {
-				System.out.println(i + 1 + ". " + list[i].toString());
+				System.out
+						.println(i + 1 + ". " + list[i].toString());
 				sameCount++;
 			}
 		}
@@ -174,7 +176,7 @@ public class A_PhoneManager implements Program {
 	}
 
 	@Override
-	public void run() throws Exception {
+	public void run() {
 		String fileName = null;
 		load(fileName);
 
@@ -210,7 +212,7 @@ public class A_PhoneManager implements Program {
 		// 파일 입출력 구현 예정
 	}
 
-	private void insert() throws Exception {
+	private void insert() {
 		// 정보를 입력(이름, 번호)
 		scan.nextLine();// 엔터 처리
 		System.out.print("이름 : ");

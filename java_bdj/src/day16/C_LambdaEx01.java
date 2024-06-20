@@ -26,6 +26,7 @@ public class C_LambdaEx01 {
 	
 	public static void ttt(C c) {
 		
+		
 	}
 
 }

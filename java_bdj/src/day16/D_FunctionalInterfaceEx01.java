@@ -2,6 +2,7 @@ package day16;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -29,38 +30,41 @@ public class D_FunctionalInterfaceEx01 {
 		return p.get();
 	}
 
-	//Function<Person, String> f  Person input -> String output 형태
+	// Function<Person, String> f Person input -> String output 형태
 	public static void print2(List<Person> list, Function<Person, String> f) {
 		for (Person tmp : list) {
 			System.out.println(f.apply(tmp));
 		}
 	}
-	
+
 	public static Integer print22(List<Person> list, Function<Person, Integer> f) {
-		int sum =0;
+		int sum = 0;
 		for (Person tmp : list) {
 			sum += f.apply(tmp);
 		}
 		return sum;
 	}
 
-	// apply 
-	// apply 안에 인자가 들어오면 해당 인자를 람다식에서 사용한다. 
-	// set 함수는 특정 index에 해당 값을 넣는 것 
+	// apply
+	// apply 안에 인자가 들어오면 해당 인자를 람다식에서 사용한다.
+	// set 함수는 특정 index에 해당 값을 넣는 것
 	// 쉽게 말해 return 받은 list를 그냥 통으로 set 한 것.
+	// a unary operator that always returns its input argument
+	// input 과 output이 동일한 형태여야 한다.
+	// 나이를 올려서 Person 객체를 넘겨줌. 그걸 그대로 받아서 list에 반영함
 	public static void increaseAge(List<Person> list, UnaryOperator<Person> oper) {
 		for (int i = 0; i < list.size(); i++) {
 			list.set(i, oper.apply(list.get(i)));
 		}
 	}
-	
+
 //	increaseAge(list, (p1) -> {
 //		p1.setAge(p1.getAge() + 1);
 //		return p1;
 //	});
 
 	public static void print3(List<Person> list, Predicate<Person> p) {
-		
+
 		for (Person tmp : list) {
 			if (p.test(tmp)) {
 				System.out.println(tmp);
@@ -96,17 +100,21 @@ public class D_FunctionalInterfaceEx01 {
 		System.out.println(i);
 
 		print2(list, (p1) -> p1.getName());
-		
 
 		increaseAge(list, (p1) -> {
 			p1.setAge(p1.getAge() + 1);
 			return p1;
 		});
 		System.out.println(list);
-		
-		print3(list, p1->p1.getAge()>30);
-		
+
+		print3(list, p1 -> p1.getAge() > 30);
+
 		print22(list, (p1) -> p1.getAge());
+
+		UnaryOperator<Integer> absolute = num -> num >= 0 ? num : -num;
+		UnaryOperator<Integer> doubleNumber = num -> num * 2;
+
+		System.out.println(absolute.andThen(doubleNumber).apply(-15));
 	}
 
 }

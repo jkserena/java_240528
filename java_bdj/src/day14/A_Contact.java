@@ -8,7 +8,7 @@ public class A_Contact {
 	private String name;
 	private String number;
 
-	public A_Contact(String name, String number) throws Exception {
+	public A_Contact(String name, String number){
 		this.name = name;
 		setNumber(number);
 	}
@@ -52,12 +52,12 @@ public class A_Contact {
 		return number;
 	}
 
-	public void setNumber(String number) throws Exception {
+	public void setNumber(String number)  {
 		// 주어진 번호가 전화 번호 형태가 아니면 예외를 발생 시키고 맞으면 번호에 저장
 		// 010-1234-5677 또는 02-123-4568 또는 041-234-5678 형태의 문자열을 처리하기 위한 정규표현식
 		String regex = "^\\d{2,3}-\\d{3,4}-\\d{4}$";
 		if (!Pattern.matches(regex, number)) {
-			throw new Exception("주어진 번호는 번호 형태가 아닙니다.");
+//			throw new Exception("주어진 번호는 번호 형태가 아닙니다.");
 		}
 		this.number = number;
 	}
