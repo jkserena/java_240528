@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -202,7 +203,15 @@ public class ContactManager implements Program {
 		load(fileName);
 
 		System.out.println(list);
-
+		// javadoc -> 특정한 배열에 의해 백업된 고정된 크기의 List를 반환
+		// asList로 List에 값을 넣어주면 그 후에 값이 추가가 안됨
+		// new ArrayList<> 다시 할당해주기!
+//		list = new ArrayList<>(Arrays.asList(
+//				new Contact("010-1111-2222", "홍길동"),
+//				new Contact("010-2222-3333", "고길동"),
+//				new Contact("010-1234-5678", "둘리"),
+//				new Contact("010-4444-2222", "하니")));
+//		System.out.println(list);
 		int menuNum = -1;
 		do {
 
@@ -220,13 +229,6 @@ public class ContactManager implements Program {
 			runMenu(menuNum);
 
 		} while (menuNum != 5);
-
-// asList로 List에 값을 넣어주면 그 후에 값이 추가가 안됨		
-//		list = Arrays.asList(
-//				new Contact("010-1111-2222", "홍길동"),
-//				new Contact("010-2222-3333", "고길동"),
-//				new Contact("010-1234-5678", "둘리"),
-//				new Contact("010-4444-2222", "하니"));
 
 		save(fileName);
 	}
